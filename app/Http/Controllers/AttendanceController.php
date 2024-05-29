@@ -9,7 +9,7 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        return view('attendance.index');
+        return view('pages.attendance.index');
     }
 
     public function clockIn()
