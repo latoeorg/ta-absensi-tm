@@ -19,6 +19,15 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                {{-- @if (request()->session()->get('user')['role'] === 'SUPERADMIN') --}}
+                <li class="nav-header font-weight-bold">Setup</li>
+                <li class="nav-item">
+                    <a href="/attendence" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-clock"></i>
+                        <p>Attendence</p>
+                    </a>
+                </li>
+                {{-- @endif --}}
                 {{-- {{ request()->session()->get('user')['name'] }} --}}
                 @if (request()->session()->get('user')['role'] === 'SUPERADMIN')
                     <li class="nav-header font-weight-bold">Setup</li>

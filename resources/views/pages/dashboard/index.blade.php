@@ -16,12 +16,12 @@
                 <div class="col-12">
                     <div class="mb-4">
                         <p class="text-muted mb-0">Income</p>
-                        <h2 class="rupiah-format mb-1" style="font-weight: 600">{{ $totalProfit }}</h1>
+                        {{-- <h2 class="rupiah-format mb-1" style="font-weight: 600">{{ $totalProfit }}</h1> --}}
                             <p class="mb-0" style="font-weight: 600">
-                                <span class="text-danger">PO - <span
+                                {{-- <span class="text-danger">PO - <span
                                         class="rupiah-format">{{ $totalAmountPurchaseOrder }}</span></span>,
                                 <span class="text-success">SO + <span
-                                        class="rupiah-format">{{ $totalAmountSalesOrder }}</span></span>
+                                        class="rupiah-format">{{ $totalAmountSalesOrder }}</span></span> --}}
                             </p>
 
                     </div>
@@ -32,12 +32,12 @@
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>{{ $totalPurchaseOrder }}</h3>
+                                    {{-- <h3>{{ $totalPurchaseOrder }}</h3> --}}
 
                                     <p class="mb-0">Purchase Order</p>
 
                                     <p class="">
-                                        There's <b>{{ $totalPurchaseOrderNotDone }}</b> not finished purchase order
+                                        {{-- There's <b>{{ $totalPurchaseOrderNotDone }}</b> not finished purchase order --}}
                                     </p>
                                 </div>
                                 <div class="icon">
@@ -49,12 +49,12 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>{{ $totalSalesOrder }}</h3>
+                                    {{-- <h3>{{ $totalSalesOrder }}</h3> --}}
 
                                     <p class="mb-0">Sales Order</p>
 
                                     <p class="">
-                                        There's <b>{{ $totalSalesOrderNotDone }}</b> not finished purchase order
+                                        {{-- There's <b>{{ $totalSalesOrderNotDone }}</b> not finished purchase order --}}
 
                                     </p>
                                 </div>
@@ -70,12 +70,12 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text mb-0">Goods</span>
                                     <span class="info-box-number" style="font-size: 1.9rem; line-height: 1.9rem">
-                                        {{ $totalItem }}
+                                        {{-- {{ $totalItem }} --}}
                                     </span>
 
                                     <span class="progress-description">
-                                        There are <b>{{ $totalStock }}</b> good stocks in the warehouse <br>
-                                        There are <b>{{ $totalLowStock }}</b> goods that are running low in the
+                                        {{-- There are <b>{{ $totalStock }}</b> good stocks in the warehouse <br>
+                                        There are <b>{{ $totalLowStock }}</b> goods that are running low in the --}}
                                         warehouse
                                     </span>
                                 </div>
@@ -104,7 +104,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i = 1; ?>
+                                    {{-- <?php $i = 1; ?>
                                     @foreach ($items as $item)
                                         <tr>
                                             <td>{{ $i }}</td>
@@ -115,7 +115,7 @@
                                             <td>{{ $item->quantity_after }}</td>
                                         </tr>
                                         <?php $i++; ?>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>

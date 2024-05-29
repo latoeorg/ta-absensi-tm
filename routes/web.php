@@ -15,6 +15,7 @@ use App\Http\Controllers\InvoiceController;
 
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AttendanceController;
 
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])
@@ -37,3 +38,14 @@ Route::resource('/history', HistoryController::class)->middleware('auth');
 
 Route::resource('/item', ItemController::class)->middleware('auth');
 Route::resource('/user', UserController::class)->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::post('/clock-in', [AttendanceController::class, 'clockIn']);
+    Route::post('/clock-out', [AttendanceController::class, 'clockOut']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+    Route::post('/attendance/clock-in', [AttendanceController::class, 'clockIn'])->name('attendance.clockIn');
+    Route::post('/attendance/clock-out', [AttendanceController::class, 'clockOut'])->name('attendance.clockOut');
+    Route::get('/attendance/history', [AttendanceController::class, 'history'])->name('attendance.history');
+});
