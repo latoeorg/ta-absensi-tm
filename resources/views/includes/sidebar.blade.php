@@ -22,14 +22,20 @@
                 {{-- @if (request()->session()->get('user')['role'] === 'SUPERADMIN') --}}
                 <li class="nav-header font-weight-bold">Setup</li>
                 <li class="nav-item">
-                    <a href="/attendence" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
+                    <a href="/attendance" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-clock"></i>
-                        <p>Attendence</p>
+                        <p>Attendance</p>
                     </a>
                 </li>
                 {{-- @endif --}}
                 {{-- {{ request()->session()->get('user')['name'] }} --}}
                 @if (request()->session()->get('user')['role'] === 'SUPERADMIN')
+                    <li class="nav-item">
+                        <a href="/generate-qr" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Generate QR</p>
+                        </a>
+                    </li>
                     <li class="nav-header font-weight-bold">Setup</li>
                     <li class="nav-item">
                         <a href="/user" class="nav-link {{ Request::is('user') ? 'active' : '' }}">

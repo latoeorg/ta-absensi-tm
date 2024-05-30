@@ -15,7 +15,7 @@ class CreateQrCodesTable extends Migration
     {
         Schema::create('qr_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->text('code');
             $table->date('date')->unique(); // Each QR code is unique per day
             $table->timestamps();
         });

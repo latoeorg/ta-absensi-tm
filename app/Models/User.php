@@ -42,4 +42,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Attendance::class);
     }
+
+    public function isSuperAdmin()
+    {
+        return $this->role === 'SUPERADMIN'; // Adjust this according to your role implementation
+    }
+
+
 }

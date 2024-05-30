@@ -1,15 +1,18 @@
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use Carbon\Carbon;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
     public function index()
     {
-        return view('pages.attendance.index');
+        $attendances = Attendance::where('user_id', Auth::id())->orderBy('date', 'desc')->get();
+        return view('pages.attendance.index', compact('attendances'));
     }
 
     public function clockIn()
@@ -36,11 +39,5 @@ class AttendanceController extends Controller
         }
 
         return response()->json(['message' => 'Clock in first'], 400);
-    }
-
-    public function history()
-    {
-        $attendances = Attendance::where('user_id', Auth::id())->orderBy('date', 'desc')->get();
-        return response()->json(['attendances' => $attendances]);
     }
 }

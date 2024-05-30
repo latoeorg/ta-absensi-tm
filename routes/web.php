@@ -16,6 +16,11 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\QrCodeController;
+
+
+Route::get('/generate-qr', [QrCodeController::class, 'generate'])->name('qr.generate');
+Route::get('/scan-qr', [QrCodeController::class, 'scan'])->name('qr.scan'); // Adjusted route name
 
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])
@@ -38,14 +43,7 @@ Route::resource('/history', HistoryController::class)->middleware('auth');
 
 Route::resource('/item', ItemController::class)->middleware('auth');
 Route::resource('/user', UserController::class)->middleware('auth');
-Route::middleware('auth')->group(function () {
-    Route::post('/clock-in', [AttendanceController::class, 'clockIn']);
-    Route::post('/clock-out', [AttendanceController::class, 'clockOut']);
-});
 
-Route::middleware('auth')->group(function () {
-    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
-    Route::post('/attendance/clock-in', [AttendanceController::class, 'clockIn'])->name('attendance.clockIn');
-    Route::post('/attendance/clock-out', [AttendanceController::class, 'clockOut'])->name('attendance.clockOut');
-    Route::get('/attendance/history', [AttendanceController::class, 'history'])->name('attendance.history');
-});
+Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+Route::post('/attendance/clock-in', [AttendanceController::class, 'clockIn'])->name('attendance.clock-in');
+Route::post('/attendance/clock-out', [AttendanceController::class, 'clockOut'])->name('attendance.clock-out');
