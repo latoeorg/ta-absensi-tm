@@ -7,13 +7,9 @@ use App\Models\QrCode;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
-use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Gate;
-use Endroid\QrCode\RoundBlockSizeMode;
 
 class QrCodeController extends Controller
 {
@@ -28,8 +24,8 @@ class QrCodeController extends Controller
         $qrCode = QrCode::where('date', $date)->first();
 
         if (!$qrCode) {
-        // Generate the QR code
-            $qrCodeData = route('qr.scan'); // Use the appropriate route name here
+            // Generate the QR code
+            $qrCodeData = route('/login-attendance'); // Use the appropriate route name here
 
             $result = Builder::create()
                 ->writer(new PngWriter())
@@ -39,7 +35,6 @@ class QrCodeController extends Controller
                 ->errorCorrectionLevel(ErrorCorrectionLevel::Low) // Adjust the error correction level
                 ->size(500)
                 ->margin(10)
-                ->roundBlockSizeMode(RoundBlockSizeMode::Margin)
                 ->build();
 
             $qrCode = new QrCode([
@@ -53,10 +48,7 @@ class QrCodeController extends Controller
             'qrCode' => $qrCode,
             'isSuperAdmin' => $isSuperAdmin
         ]);
-
     }
-
-
 
     public function scan()
     {

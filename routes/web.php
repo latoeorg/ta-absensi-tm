@@ -19,29 +19,24 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\QrCodeController;
 
 
-Route::get('/generate-qr', [QrCodeController::class, 'generate'])->name('qr.generate');
-Route::get('/scan-qr', [QrCodeController::class, 'scan'])->name('qr.scan'); // Adjusted route name
+Route::get('/generate-qr', [QrCodeController::class, 'generate'])->name('qr.generate')->middleware('auth');
+Route::get('/scan-qr', [QrCodeController::class, 'scan'])->name('attendance.scan')->middleware('auth');
 
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])
     ->name('login')
     ->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate'])->middleware('guest');
+Route::get('/login-attendance', [AuthController::class, 'index'])
+    ->name('login-attendance')
+    ->middleware('guest');
+Route::post('/login-attendance', [AuthController::class, 'authenticateAttendance'])->middleware('guest');
 
 Route::post('/logout', [AuthController::class, 'logout']);
 
 // DASHBOARD
 Route::resource('/', DashboardController::class)->middleware('auth');
 
-Route::resource('/purchase-order', PurchaseOrderController::class)->middleware('auth');
-Route::resource('/purchase-order-item', PurchaseOrderItemController::class)->middleware('auth');
-Route::resource('/sales-order', SalesOrderController::class)->middleware('auth');
-Route::resource('/sales-order-item', SalesOrderItemController::class)->middleware('auth');
-Route::get('/invoice/print/{id}', [InvoiceController::class, 'print'])->middleware('auth');
-Route::resource('/invoice', InvoiceController::class)->middleware('auth');
-Route::resource('/history', HistoryController::class)->middleware('auth');
-
-Route::resource('/item', ItemController::class)->middleware('auth');
 Route::resource('/user', UserController::class)->middleware('auth');
 
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
