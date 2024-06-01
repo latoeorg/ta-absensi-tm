@@ -25,7 +25,7 @@ class QrCodeController extends Controller
 
         if (!$qrCode) {
             // Generate the QR code
-            $qrCodeData = route('/login-attendance'); // Use the appropriate route name here
+            $qrCodeData = route('login-attendance'); // Use the appropriate route name here
 
             $result = Builder::create()
                 ->writer(new PngWriter())

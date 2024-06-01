@@ -2,20 +2,32 @@
 
 @section('content')
 <div class="container">
-    <h1>Attendance</h1>
-    <button id="clockInBtn">Clock In</button>
-    <button id="clockOutBtn">Clock Out</button>
-    <div id="message"></div>
-    <h2>History</h2>
-    <ul id="attendanceHistory">
-        @foreach($attendances as $attendance)
-        <li>
-            Date: {{ $attendance->date }} |
-            Clock In: {{ $attendance->clock_in }} |
-            Clock Out: {{ $attendance->clock_out ?? 'N/A' }}
-        </li>
-        @endforeach
-    </ul>
+    <h1>Attendance History</h1>
+    {{-- <button id="clockInBtn" class="btn btn-primary">Clock In</button>
+    <button id="clockOutBtn" class="btn btn-secondary">Clock Out</button>
+    <div id="message" class="mt-3"></div> --}}
+    {{-- <h2>History</h2> --}}
+    <div style="overflow-y: auto; max-height: 80vh;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Clock In</th>
+                    <th>Clock Out</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($attendances as $attendance)
+                <tr>
+                    <td>{{ $attendance->date }}</td>
+                    <td>{{ $attendance->clock_in }}</td>
+                    <td>{{ $attendance->clock_out ?? 'N/A' }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

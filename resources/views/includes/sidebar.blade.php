@@ -3,7 +3,7 @@
     <a href="/" class="brand-link">
         <img src="{{ url('/logo.svg') }}" alt="Logo" class="brand-image" />
         <span class="brand-text text-poppins fw-medium">
-            IT INVENTORY
+            Sistem Absensi
         </span>
     </a>
 
@@ -11,32 +11,29 @@
     <div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="/" class="nav-link {{ Request::is('/') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                {{-- @if (request()->session()->get('user')['role'] === 'SUPERADMIN') --}}
-                <li class="nav-header font-weight-bold">Setup</li>
-                <li class="nav-item">
-                    <a href="/attendance" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
+                    <a href="/attendance" class="nav-link {{ Request::is('attendance') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-clock"></i>
                         <p>Attendance</p>
                     </a>
                 </li>
-                {{-- @endif --}}
-                {{-- {{ request()->session()->get('user')['name'] }} --}}
                 @if (request()->session()->get('user')['role'] === 'SUPERADMIN')
                     <li class="nav-item">
-                        <a href="/generate-qr" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-users"></i>
+                        <a href="/generate-qr" class="nav-link {{ Request::is('generate-qr') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-qrcode"></i>
                             <p>Generate QR</p>
                         </a>
                     </li>
-                    <li class="nav-header font-weight-bold">Setup</li>
+                @endif
+                <li class="nav-header font-weight-bold">Setting</li>
+                <li class="nav-item">
+                    <a href="/update-profile" class="nav-link {{ Request::is('update-profile') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Update Profile</p>
+                    </a>
+                </li>
+                @if (request()->session()->get('user')['role'] === 'SUPERADMIN')
                     <li class="nav-item">
                         <a href="/user" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>

@@ -7,7 +7,7 @@
                     style="opacity: .8" />
 
                 <p class="fw-medium float-left ml-2">
-                    IT INVENTORY
+                    Sistem Absensi
                 </p>
             </div>
 
@@ -23,10 +23,10 @@
     <div class="col-sm-4 invoice-col">
         From
         <address>
-            <strong>IT Inventory, Inc.</strong><br>
+            <strong>Sistem Absensi, Inc.</strong><br>
             Indonesia, Batam<br>
             Phone: (804) 123-5432<br>
-            Email: admin@itinventory.com
+            Email: Absensi@absensi.com
         </address>
     </div>
 
@@ -79,7 +79,7 @@
 
     <div class="col-6">
         <p class="lead mb-1">Note:</p>
-        Transfer to BCA 123456789 a/n IT Inventory, Inc.
+        {{-- Transfer to BCA 123456789 a/n IT Inventory, Inc. --}}
         </p>
     </div>
 
