@@ -25,6 +25,12 @@
                             <p>Generate QR</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/attendance/all" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-calendar"></i>
+                            <p>List Attendance</p>
+                        </a>
+                    </li>
                 @endif
                 <li class="nav-header font-weight-bold">Setting</li>
                 <li class="nav-item">

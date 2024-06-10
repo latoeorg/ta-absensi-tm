@@ -25,7 +25,8 @@ class QrCodeController extends Controller
 
         if (!$qrCode) {
             // Generate the QR code
-            $qrCodeData = route('login-attendance'); // Use the appropriate route name here
+            $baseUrl = 'http://' . request()->getHttpHost(); // Get the current domain or IP address
+            $qrCodeData = $baseUrl . route('login-attendance'); // Use the appropriate route name here
 
             $result = Builder::create()
                 ->writer(new PngWriter())

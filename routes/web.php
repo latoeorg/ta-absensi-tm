@@ -6,6 +6,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\QrCodeController;
+// routes/web.php
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/attendance/all', [AttendanceController::class, 'allAttendance'])->name('attendance.all');
+});
 
 Route::get('/generate-qr', [QrCodeController::class, 'generate'])->name('qr.generate')->middleware('auth');
 Route::get('/scan-qr', [QrCodeController::class, 'scan'])->name('attendance.scan')->middleware('auth');
