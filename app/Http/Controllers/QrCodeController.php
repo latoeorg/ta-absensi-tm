@@ -10,6 +10,8 @@ use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use DateTimeZone;
+use Illuminate\Support\Facades\Log;
 
 class QrCodeController extends Controller
 {
@@ -52,27 +54,30 @@ class QrCodeController extends Controller
     }
 
     public function scan()
-    {
-        $date = Carbon::now()->toDateString();
-        $user = Auth::user();
+{
+    $date = Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateString();
+    $user = Auth::user();
 
-        // Check if the user already has clocked in today
-        $attendance = $user->attendances()->where('date', $date)->first();
+    // Check if the user already has clocked in today
+    $attendance = $user->attendances()->where('date', $date)->first();
 
-        if ($attendance) {
-            // Clock out
-            $attendance->clock_out = Carbon::now();
-            $attendance->save();
-            $message = 'Clocked out successfully';
-        } else {
-            // Clock in
-            $attendance = $user->attendances()->create([
-                'date' => $date,
-                'clock_in' => Carbon::now()
-            ]);
-            $message = 'Clocked in successfully';
-        }
-
-        return redirect()->route('attendance.index')->with('status', $message);
+    if ($attendance) {
+        // Clock out
+        $attendance->clock_out = Carbon::now(new DateTimeZone('Asia/Bangkok'));
+        $attendance->save();
+        $message = 'Clocked out successfully';
+        Log::info("User " . $user->name . " clocked out at " . $attendance->clock_out->toDateTimeString());
+    } else {
+        // Clock in
+        $attendance = $user->attendances()->create([
+            'date' => $date,
+            'clock_in' => Carbon::now(new DateTimeZone('Asia/Bangkok'))
+        ]);
+        $message = 'Clocked in successfully';
+        Log::info("User " . $user->name . " clocked in at " . $attendance->clock_in->toDateTimeString());
     }
+
+    return redirect()->route('attendance.index')->with('status', $message);
+}
+
 }

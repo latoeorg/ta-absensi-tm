@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use Carbon\Carbon;
+use DateTimeZone;
 use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
@@ -17,8 +18,8 @@ class AttendanceController extends Controller
 
     public function clockIn(Request $request)
     {
-        $clientTime = $request->input('local_time');
-        $clockInTime = Carbon::parse($clientTime)->setTimezone('Asia/Bangkok');
+        // $clientTime = $request->input('local_time');
+        $clockInTime = Carbon::now(new DateTimeZone('Asia/Bangkok'));
 
         $date = $clockInTime->toDateString();
         $attendance = Attendance::updateOrCreate(
@@ -31,8 +32,8 @@ class AttendanceController extends Controller
 
     public function clockOut(Request $request)
     {
-        $clientTime = $request->input('local_time');
-        $clockOutTime = Carbon::parse($clientTime)->setTimezone('Asia/Bangkok');
+        // $clientTime = $request->input('local_time');
+        $clockOutTime = Carbon::now(new DateTimeZone('Asia/Bangkok'));
 
         $date = $clockOutTime->toDateString();
         $attendance = Attendance::where('user_id', Auth::id())->where('date', $date)->first();
