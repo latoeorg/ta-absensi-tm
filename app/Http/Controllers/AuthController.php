@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class AuthController extends Controller
 {
+    // protected $qrCodeController;
+
+    // public function __construct(QrCodeController $qrCodeController)
+    // {
+    //     $this->qrCodeController = $qrCodeController;
+    // }
+
     public function index(Request $request)
     {
         // Check if the user intended to visit a specific URL before being redirected to login
@@ -37,11 +43,12 @@ class AuthController extends Controller
             info('Current Route: ' . $currentRoute);
 
             // Redirect to the intended URL after login or default to home
-            return redirect(to:'/');
+            return redirect('/');
         }
 
         return back()->with('error', 'Email atau Password salah');
     }
+
     public function authenticateAttendance(Request $request)
     {
         $credentials = ['password' => $request->password];
@@ -60,8 +67,11 @@ class AuthController extends Controller
             $currentRoute = $request->route()->getName();
             info('Current Route: ' . $currentRoute);
 
-            // Redirect to the intended URL after login or default to home
-            return redirect(to:'/scan-qr');
+            // // Call scan function from QrCodeController
+            // app(QrCodeController::class)->scan();
+
+            // Auth::logout();
+            return redirect('/')->with('status', 'You have been logged out after attendance.');
         }
 
         return back()->with('error', 'Email atau Password salah');

@@ -1,20 +1,10 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\QrCodeController;
-// routes/web.php
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/attendance/all', [AttendanceController::class, 'allAttendance'])->name('attendance.all');
-});
-
-Route::get('/generate-qr', [QrCodeController::class, 'generate'])->name('qr.generate')->middleware('auth');
-Route::get('/scan-qr', [QrCodeController::class, 'scan'])->name('attendance.scan')->middleware('auth');
+use App\Http\Controllers\UserController;
 
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
@@ -23,16 +13,17 @@ Route::get('/login-attendance', [AuthController::class, 'index'])->name('login-a
 Route::post('/login-attendance', [AuthController::class, 'authenticateAttendance'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout']);
 
-// DASHBOARD
-Route::resource('/', AttendanceController::class)->middleware('auth');
+// QR Code
+Route::get('/generate-qr', [QrCodeController::class, 'generate'])->name('qr.generate')->middleware('auth');
+Route::get('/scan-qr', [QrCodeController::class, 'scan'])->name('attendance.scan')->middleware('auth');
 
-// USER MANAGEMENT
-Route::resource('/user', UserController::class)->middleware('auth');
-
-// PROFILE
-Route::get('/update-profile', [UserController::class, 'editProfile'])->name('update-profile')->middleware('auth');
-
-// ATTENDANCE
-Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
-Route::post('/attendance/clock-in', [AttendanceController::class, 'clockIn'])->name('attendance.clock-in');
-Route::post('/attendance/clock-out', [AttendanceController::class, 'clockOut'])->name('attendance.clock-out');
+// Other routes
+Route::middleware('auth')->group(function () {
+    Route::resource('/', AttendanceController::class);
+    Route::resource('/user', UserController::class);
+    Route::get('/update-profile', [UserController::class, 'editProfile'])->name('update-profile');
+    Route::get('/attendance/all', [AttendanceController::class, 'allAttendance'])->name('attendance.all');
+    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+    Route::post('/attendance/clock-in', [AttendanceController::class, 'clockIn'])->name('attendance.clock-in');
+    Route::post('/attendance/clock-out', [AttendanceController::class, 'clockOut'])->name('attendance.clock-out');
+});

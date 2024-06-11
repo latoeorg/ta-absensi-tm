@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <h1>Attendance History</h1>
-    <button id="clockInBtn" class="btn btn-primary">Clock In</button>
-    <button id="clockOutBtn" class="btn btn-secondary">Clock Out</button>
+    {{-- <button id="clockInBtn" class="btn btn-primary">Clock In</button>
+    <button id="clockOutBtn" class="btn btn-secondary">Clock Out</button> --}}
     <div id="message" class="mt-3"></div>
     {{-- <h2>History</h2> --}}
     <div style="overflow-y: auto; max-height: 80vh;">
@@ -30,7 +30,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+{{-- <script>
     function convertToLocalTime(isoString) {
         if (!isoString) return 'N/A';
         const date = new Date(isoString);
@@ -69,5 +69,5 @@
             });
         });
     });
-</script>
+</script> --}}
 @endsection
