@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         $items = User::all();
-        $list_level = ['SUPERADMIN', 'KARYAWAN'];
+        $list_level = ['SUPERADMIN', 'ADMIN', 'KARYAWAN'];
 
         return view('pages.user.index', [
             'items' => $items,
@@ -75,7 +75,6 @@ class UserController extends Controller
         $user = Auth::user();
         return view('pages.user.update-profile', compact('user'));
     }
-
 
     public function edit(Request $request, string $id)
     {
