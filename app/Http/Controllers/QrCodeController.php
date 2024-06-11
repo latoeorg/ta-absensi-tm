@@ -51,14 +51,14 @@ class QrCodeController extends Controller
 
             $qrCode = new QrCode([
                 'code' => base64_encode($result->getString()),
-                'date' => Carbon::now()
+                'date' => Carbon::now(),
             ]);
             $qrCode->save();
         }
 
         return view('pages.qr.generate', [
             'qrCode' => $qrCode,
-            'isSuperAdmin' => $isSuperAdmin
+            'isSuperAdmin' => $isSuperAdmin,
         ]);
     }
 

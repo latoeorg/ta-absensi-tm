@@ -7,9 +7,14 @@ use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\UserController;
 
 // AUTH
-Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/login', [AuthController::class, 'index'])
+    ->name('login')
+    ->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate'])->middleware('guest');
-Route::get('/login-attendance', [AuthController::class, 'index'])->name('login-attendance')->middleware('guest');
+Route::get('/login-attendance', [AuthController::class, 'index'])
+    ->name('login-attendance')
+    ->middleware('guest');
+
 Route::post('/login-attendance', [AuthController::class, 'authenticateAttendance'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout']);
 
