@@ -15,8 +15,10 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users');
             $table->date('date_start');
             $table->date('date_end');
+            $table->string('type');
             $table->string('status')->default('PENDING');
             $table->text('notes')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

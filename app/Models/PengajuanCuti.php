@@ -9,7 +9,7 @@ class PengajuanCuti extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'date_start', 'date_end', 'status', 'notes'];
+    protected $fillable = ['user_id', 'date_start', 'date_end', 'type', 'status', 'notes', 'comment'];
 
     public function user()
     {
