@@ -3,7 +3,7 @@
     <a href="/" class="brand-link">
         <img src="{{ url('/logo.png') }}" alt="Logo" class="brand-image" />
         <span class="brand-text text-poppins fw-medium">
-            Sistem Absensi
+            Gemilang Mart
         </span>
     </a>
 
@@ -26,6 +26,8 @@
                             <p>Generate QR</p>
                         </a>
                     </li>
+                @endif
+                @if (request()->session()->get('user')['role'] !== 'KARYAWAN')
                     <li class="nav-item">
                         <a href="/attendance/all" class="nav-link {{ Request::is('attendance/all') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar"></i>
@@ -39,12 +41,14 @@
                         <p>Pengajuan Cuti</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="/report-cuti" class="nav-link {{ Request::is('report-cuti') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-calendar-week"></i>
-                        <p>Report Cuti</p>
-                    </a>
-                </li>
+                @if (request()->session()->get('user')['role'] !== 'KARYAWAN')
+                    <li class="nav-item">
+                        <a href="/report-cuti" class="nav-link {{ Request::is('report-cuti') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-calendar-week"></i>
+                            <p>Report Cuti</p>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-header font-weight-bold">Setting</li>
                 <li class="nav-item">
                     <a href="/update-profile" class="nav-link {{ Request::is('update-profile') ? 'active' : '' }}">

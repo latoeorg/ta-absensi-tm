@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        Sistem Absensi
+        Gemilang Mart | Sistem Absensi & Manajemen Cuti Karyawan
     </title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url('/apple-touch-icon.png') }}">
