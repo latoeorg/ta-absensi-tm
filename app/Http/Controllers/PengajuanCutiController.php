@@ -22,19 +22,16 @@ class PengajuanCutiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['status'] = 'PENDING';
+
+        PengajuanCuti::create($data);
+
+        return redirect()->route('pengajuan-cuti.index')->with('success', 'Pengajuan cuti berhasil diajukan');
     }
 
     /**
@@ -46,19 +43,14 @@ class PengajuanCutiController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(PengajuanCuti $pengajuanCuti)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, PengajuanCuti $pengajuanCuti)
     {
-        //
+        $data = $request->all();
+        $pengajuanCuti->update($data);
+
+        return redirect()->route('pengajuan-cuti.index')->with('success', 'Pengajuan cuti berhasil diupdate');
     }
 
     /**

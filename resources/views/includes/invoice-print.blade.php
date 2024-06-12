@@ -3,7 +3,7 @@
         <h4>
             {{-- <i class="fas fa-globe"></i> AdminLTE, Inc. --}}
             <div>
-                <img src="{{ asset('logo.svg') }}" alt="Logo" width="30" class="brand-image float-left"
+                <img src="{{ asset('logo.png') }}" alt="Logo" width="30" class="brand-image float-left"
                     style="opacity: .8" />
 
                 <p class="fw-medium float-left ml-2">

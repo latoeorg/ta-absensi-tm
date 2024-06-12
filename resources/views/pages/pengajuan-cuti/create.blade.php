@@ -2,7 +2,7 @@
 <div class="modal fade" id="formCreate" tabindex="-1" role="dialog" aria-labelledby="formCreateLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form action="{{ route('user.store') }}" method="POST">
+            <form action="{{ route('pengajuan-cuti.store') }}" method="POST">
                 @csrf
 
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />

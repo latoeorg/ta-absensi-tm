@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-light-navy border-right">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-        <img src="{{ url('/logo.svg') }}" alt="Logo" class="brand-image" />
+        <img src="{{ url('/logo.png') }}" alt="Logo" class="brand-image" />
         <span class="brand-text text-poppins fw-medium">
             Sistem Absensi
         </span>
