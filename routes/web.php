@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PengajuanCutiController;
+use App\Http\Controllers\ReportCutiController;
 
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/', AttendanceController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/pengajuan-cuti', PengajuanCutiController::class);
+    Route::resource('/report-cuti', ReportCutiController::class);
 
     Route::get('/update-profile', [UserController::class, 'editProfile'])->name('update-profile');
     Route::get('/attendance/all', [AttendanceController::class, 'allAttendance'])->name('attendance.all');

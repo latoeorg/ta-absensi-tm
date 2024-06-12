@@ -19,9 +19,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#formCreate"><i
-                                    class="fa fa-plus"></i> Ajukan</a>
-                            @include('pages.pengajuan-cuti.create')
+                            @if (request()->session()->get('user')['role'] === 'KARYAWAN')
+                                <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#formCreate"><i
+                                        class="fa fa-plus"></i> Ajukan</a>
+                                @include('pages.pengajuan-cuti.create')
+                            @endif
                             <table id="defaultTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -57,10 +59,12 @@
                                                     data-target="#detailModal{{ $item->id }}">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a type="button" class="btn btn-warning" data-toggle="modal"
-                                                    data-target="#formUpdate{{ $item->id }}">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
+                                                @if (request()->session()->get('user')['role'] === 'ADMIN' && $item->status === 'PENDING')
+                                                    <a type="button" class="btn btn-warning" data-toggle="modal"
+                                                        data-target="#formUpdate{{ $item->id }}">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                         <?php $i++; ?>

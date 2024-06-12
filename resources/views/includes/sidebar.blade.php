@@ -32,13 +32,19 @@
                             <p>List Attendance</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/pengajuan-cuti" class="nav-link {{ Request::is('pengajuan-cuti') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-calendar-alt"></i>
-                            <p>Pengajuan Cuti</p>
-                        </a>
-                    </li>
                 @endif
+                <li class="nav-item">
+                    <a href="/pengajuan-cuti" class="nav-link {{ Request::is('pengajuan-cuti') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>Pengajuan Cuti</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/report-cuti" class="nav-link {{ Request::is('report-cuti') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-calendar-week"></i>
+                        <p>Report Cuti</p>
+                    </a>
+                </li>
                 <li class="nav-header font-weight-bold">Setting</li>
                 <li class="nav-item">
                     <a href="/update-profile" class="nav-link {{ Request::is('update-profile') ? 'active' : '' }}">
