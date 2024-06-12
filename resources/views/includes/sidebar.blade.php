@@ -32,6 +32,12 @@
                             <p>List Attendance</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/pengajuan-cuti" class="nav-link {{ Request::is('pengajuan-cuti') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-calendar-alt"></i>
+                            <p>Pengajuan Cuti</p>
+                        </a>
+                    </li>
                 @endif
                 <li class="nav-header font-weight-bold">Setting</li>
                 <li class="nav-item">

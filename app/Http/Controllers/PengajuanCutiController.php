@@ -12,7 +12,13 @@ class PengajuanCutiController extends Controller
      */
     public function index()
     {
-        //
+        $items = PengajuanCuti::all();
+        $list_type = ['Sakit', 'Izin', 'Cuti', 'Lainnya'];
+
+        return view('pages.pengajuan-cuti.index', [
+            'items' => $items,
+            'list_type' => $list_type,
+        ]);
     }
 
     /**

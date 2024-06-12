@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <strong>Copyright &copy; 2024 -
-        Maytree Della Anasthasyah Harianjah
+        Titin Melani Samosir
     </strong>
     All rights reserved.
 </footer>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PengajuanCutiController;
 
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])
@@ -19,13 +20,19 @@ Route::post('/login-attendance', [AuthController::class, 'authenticateAttendance
 Route::post('/logout', [AuthController::class, 'logout']);
 
 // QR Code
-Route::get('/generate-qr', [QrCodeController::class, 'generate'])->name('qr.generate')->middleware('auth');
-Route::get('/scan-qr', [QrCodeController::class, 'scan'])->name('attendance.scan')->middleware('auth');
+Route::get('/generate-qr', [QrCodeController::class, 'generate'])
+    ->name('qr.generate')
+    ->middleware('auth');
+Route::get('/scan-qr', [QrCodeController::class, 'scan'])
+    ->name('attendance.scan')
+    ->middleware('auth');
 
 // Other routes
 Route::middleware('auth')->group(function () {
     Route::resource('/', AttendanceController::class);
     Route::resource('/user', UserController::class);
+    Route::resource('/pengajuan-cuti', PengajuanCutiController::class);
+
     Route::get('/update-profile', [UserController::class, 'editProfile'])->name('update-profile');
     Route::get('/attendance/all', [AttendanceController::class, 'allAttendance'])->name('attendance.all');
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
