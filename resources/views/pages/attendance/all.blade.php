@@ -36,6 +36,7 @@
                         <th>Date</th>
                         <th>Clock In</th>
                         <th>Clock Out</th>
+                        <th>Total Hour</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,7 @@
                             <td>{{ $attendance->date }}</td>
                             <td>{{ $attendance->clock_in }}</td>
                             <td>{{ $attendance->clock_out ?? 'N/A' }}</td>
+                            <td>{{ $attendance->total_hour ?? 'N/A' }}</td>
                         </tr>
                     @endforeach
                 </tbody>

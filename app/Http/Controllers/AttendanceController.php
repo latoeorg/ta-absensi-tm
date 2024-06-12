@@ -22,10 +22,7 @@ class AttendanceController extends Controller
         $clockInTime = Carbon::now(new DateTimeZone('Asia/Bangkok'));
 
         $date = $clockInTime->toDateString();
-        $attendance = Attendance::updateOrCreate(
-            ['user_id' => Auth::id(), 'date' => $date],
-            ['clock_in' => $clockInTime]
-        );
+        $attendance = Attendance::updateOrCreate(['user_id' => Auth::id(), 'date' => $date], ['clock_in' => $clockInTime]);
 
         return response()->json(['message' => 'Clocked in successfully', 'attendance' => $attendance]);
     }
@@ -57,6 +54,10 @@ class AttendanceController extends Controller
         }
 
         $attendances = $query->with('user')->orderBy('date', 'desc')->get();
+
+        foreach ($attendances as $attendance) {
+            $attendance->total_hour = $attendance->clock_out ? Carbon::parse($attendance->clock_in)->diff($attendance->clock_out) : null;
+        }
 
         return view('pages.attendance.all', compact('attendances'));
     }
