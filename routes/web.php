@@ -9,9 +9,11 @@ use App\Http\Controllers\PengajuanCutiController;
 use App\Http\Controllers\ReportCutiController;
 
 // Set root page to QR code generation page
-Route::get('/', [QrCodeController::class, 'generate'])
-    ->name('qr.generate')
-    ->middleware('auth');
+// Route::get('/', [QrCodeController::class, 'generate'])
+//     ->name('qr.generate')
+//     ->middleware('auth');
+
+Route::resource('/', AttendanceController::class);
 
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])
