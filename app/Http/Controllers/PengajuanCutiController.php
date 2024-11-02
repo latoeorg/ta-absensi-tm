@@ -10,16 +10,21 @@ class PengajuanCutiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $items = PengajuanCuti::all();
-        $list_type = ['Sakit', 'Izin', 'Cuti', 'Lainnya'];
+public function index()
+{
+    $list_type = ['Sakit', 'Izin', 'Cuti', 'Lainnya'];
 
-        return view('pages.pengajuan-cuti.index', [
-            'items' => $items,
-            'list_type' => $list_type,
-        ]);
+    if (auth()->user()->role === 'SUPERADMIN' || auth()->user()->role === 'ADMIN') {
+        $items = PengajuanCuti::all();
+    } else {
+        $items = PengajuanCuti::where('user_id', auth()->id())->get();
     }
+
+    return view('pages.pengajuan-cuti.index', [
+        'items' => $items,
+        'list_type' => $list_type,
+    ]);
+}
 
     /**
      * Store a newly created resource in storage.

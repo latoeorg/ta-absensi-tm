@@ -31,4 +31,8 @@ class User extends Authenticatable
     {
         return $this->role === 'SUPERADMIN'; // Ensure this matches your database structure
     }
+    public function isAdmin()
+    {
+        return $this->role === 'ADMIN'; // Ensure this matches your database structure
+    }
 }

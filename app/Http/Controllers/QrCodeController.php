@@ -27,6 +27,8 @@ class QrCodeController extends Controller
     {
         // Check if the user is a super admin
         $isSuperAdmin = Auth::user()->isSuperAdmin();
+        $isAdmin = Auth::user()->isAdmin();
+
         $baseUrl = $request->root();
         // dd($baseUrl);
 
@@ -59,6 +61,7 @@ class QrCodeController extends Controller
         return view('pages.qr.generate', [
             'qrCode' => $qrCode,
             'isSuperAdmin' => $isSuperAdmin,
+            'isAdmin' => $isAdmin,
         ]);
     }
 

@@ -67,3 +67,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date_start').setAttribute('min', today);
+        document.getElementById('date_end').setAttribute('min', today);
+
+        document.getElementById('date_start').addEventListener('change', function () {
+            const startDate = this.value;
+            document.getElementById('date_end').setAttribute('min', startDate);
+        });
+    });
+</script>

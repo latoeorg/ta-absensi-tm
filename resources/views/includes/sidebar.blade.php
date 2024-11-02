@@ -19,7 +19,7 @@
                         <p>Attendance</p>
                     </a>
                 </li>
-                @if (request()->session()->get('user')['role'] === 'SUPERADMIN')
+                @if (request()->session()->get('user')['role'] === 'SUPERADMIN' || request()->session()->get('user')['role'] === 'ADMIN')
                     <li class="nav-item">
                         <a href="/generate-qr" class="nav-link {{ Request::is('generate-qr') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-qrcode"></i>
@@ -56,7 +56,7 @@
                         <p>Update Profile</p>
                     </a>
                 </li>
-                @if (request()->session()->get('user')['role'] === 'SUPERADMIN')
+                @if (request()->session()->get('user')['role'] === 'SUPERADMIN' || request()->session()->get('user')['role'] === 'ADMIN')
                     <li class="nav-item">
                         <a href="/user" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>

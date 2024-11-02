@@ -8,6 +8,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PengajuanCutiController;
 use App\Http\Controllers\ReportCutiController;
 
+// Set root page to QR code generation page
+Route::get('/', [QrCodeController::class, 'generate'])
+    ->name('qr.generate')
+    ->middleware('auth');
+
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])
     ->name('login')
@@ -30,7 +35,6 @@ Route::get('/scan-qr', [QrCodeController::class, 'scan'])
 
 // Other routes
 Route::middleware('auth')->group(function () {
-    Route::resource('/', AttendanceController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/pengajuan-cuti', PengajuanCutiController::class);
     Route::resource('/report-cuti', ReportCutiController::class);
