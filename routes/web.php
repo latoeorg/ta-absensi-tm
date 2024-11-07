@@ -13,7 +13,7 @@ use App\Http\Controllers\ReportCutiController;
 //     ->name('qr.generate')
 //     ->middleware('auth');
 
-Route::resource('/', AttendanceController::class);
+Route::resource('/', AttendanceController::class)->middleware('auth');
 
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])
