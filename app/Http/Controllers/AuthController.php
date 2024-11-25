@@ -5,14 +5,49 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\QrCode;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use DateTimeZone;
+
 class AuthController extends Controller
 {
-    // protected $qrCodeController;
+    private function generateQrCode(Request $request)
+    {
+        $baseUrl = $request->root();
+        $date = Carbon::now()->toDateString();
 
-    // public function __construct(QrCodeController $qrCodeController)
-    // {
-    //     $this->qrCodeController = $qrCodeController;
-    // }
+        $qrCode = QrCode::where('date', $date)->first();
+
+        if (!$qrCode) {
+            // Generate the QR code
+            // Get the current domain or IP address
+            $qrCodeData = $baseUrl . '/scan-qr'; // Use the appropriate route name here
+
+            $result = Builder::create()
+                ->writer(new PngWriter())
+                ->writerOptions([])
+                ->data($qrCodeData)
+                ->encoding(new Encoding('UTF-8'))
+                ->errorCorrectionLevel(ErrorCorrectionLevel::Low) // Adjust the error correction level
+                ->size(500)
+                ->margin(10)
+                ->build();
+
+            $qrCode = new QrCode([
+                'code' => base64_encode($result->getString()),
+                'date' => Carbon::now(),
+            ]);
+            $qrCode->save();
+        }
+
+        return $qrCode;
+    }
 
     public function index(Request $request)
     {
@@ -21,7 +56,9 @@ class AuthController extends Controller
             session(['url.intended' => $request->intended]);
         }
 
-        return view('pages.auth.login-attendance'); // Ensure this points to the correct view file
+        return view('pages.auth.login-attendance', [
+            'qrCode' => $this->generateQrCode($request),
+        ]); // Ensure this points to the correct view file
     }
 
     public function authenticate(Request $request)
